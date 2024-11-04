@@ -1,7 +1,7 @@
-About this Assignment
+# About this Assignment
 In this course, you have learned about trees in data structure, binary trees, and binary search trees. For this assignment, you will develop an application using the Java programming language.
 
-Assignment Prompt
+# Assignment Prompt
 The application must address the following requirements:
 
 - Include a user interface allowing a user to interact with the binary search tree.
