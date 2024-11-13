@@ -8,6 +8,11 @@ public class Main {
         System.out.println("Root = " + myBst.getRoot().value);
         System.out.println("Left child = " + myBst.getRoot().left.value);
         System.out.println("Right child = " + myBst.getRoot().right.value);
+
+        System.out.println("\nIn order:");
         myBst.inOrderPrint();
+
+        System.out.println("\nPre order:");
+        myBst.preOrderPrint();
     }
 }

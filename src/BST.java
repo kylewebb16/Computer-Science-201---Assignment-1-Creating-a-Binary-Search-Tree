@@ -25,7 +25,6 @@ public class BST {
     public void insert(int value) {
         root = rInsert(root, value);
     }
-    // Private recursive insert method
     private Node rInsert(Node currentNode, int value) {
         // Base case: if current Node is null, return new Node(value)
         if (currentNode == null) {
@@ -33,12 +32,8 @@ public class BST {
             return new Node(value);
         }
         // check if val is less than, or greater than currentNode.val: recursive call rInsert 
-        if (value < currentNode.value) {
-            currentNode.left = rInsert(currentNode.left, value);
-        }
-        else if (value > currentNode.value) {
-            currentNode.right = rInsert(currentNode.right, value);
-        }
+        if (value < currentNode.value) currentNode.left = rInsert(currentNode.left, value);
+        else if (value > currentNode.value) currentNode.right = rInsert(currentNode.right, value);
 
         return currentNode;
     }
@@ -55,6 +50,22 @@ public class BST {
             }
         }
         new Traverse(root);
+        System.out.println(results);
+        return results;
+    }
+
+    public ArrayList<Integer> preOrderPrint() {
+        ArrayList<Integer> results = new ArrayList<>(numOfNodes);
+        class Traverse {
+            public Traverse(Node currentNode) {
+                // Add current value to results, prioritize left search, when no left nodes remain go right
+                results.add(currentNode.value);
+                if (currentNode.left != null) new Traverse(currentNode.left);
+                if (currentNode.right != null) new Traverse(currentNode.right);
+            }
+        }
+        new Traverse(root);
+
         System.out.println(results);
         return results;
     }
