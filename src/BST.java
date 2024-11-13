@@ -39,6 +39,7 @@ public class BST {
     }
 
     public ArrayList<Integer> inOrderPrint() {
+        // Depth first search, visits nodes from smallest value to largest
         ArrayList<Integer> results = new ArrayList<>(numOfNodes);
         class Traverse {
             public Traverse(Node currentNode) {
@@ -55,7 +56,9 @@ public class BST {
     }
 
     public ArrayList<Integer> preOrderPrint() {
+        // Depth first search, visits current node before visiting children
         ArrayList<Integer> results = new ArrayList<>(numOfNodes);
+        // Create recursive traverse method
         class Traverse {
             public Traverse(Node currentNode) {
                 // Add current value to results, prioritize left search, when no left nodes remain go right
@@ -66,6 +69,24 @@ public class BST {
         }
         new Traverse(root);
 
+        System.out.println(results);
+        return results;
+    }
+
+    public ArrayList<Integer> postOrderPrint() {
+        // Depth first search, visits nodes children first, then goes to parents
+        ArrayList<Integer> results = new ArrayList<>(numOfNodes);
+        // Create recursive traverse method
+        class Traverse {
+            public Traverse(Node currentNode) {
+                // Search left first, when no left nodes remain go right, when no child nodes write value to results
+
+                if (currentNode.left != null) new Traverse(currentNode.left);
+                if (currentNode.right != null) new Traverse(currentNode.right);
+                results.add(currentNode.value);
+            }
+        }
+        new Traverse(root);
         System.out.println(results);
         return results;
     }

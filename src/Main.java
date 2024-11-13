@@ -5,14 +5,17 @@ public class Main {
         myBst.insert(5);
         myBst.insert(5);
         myBst.insert(15);
-        System.out.println("Root = " + myBst.getRoot().value);
-        System.out.println("Left child = " + myBst.getRoot().left.value);
-        System.out.println("Right child = " + myBst.getRoot().right.value);
+        myBst.insert(3);
+        myBst.insert(1);
+        myBst.insert(9);
 
         System.out.println("\nIn order:");
         myBst.inOrderPrint();
 
         System.out.println("\nPre order:");
         myBst.preOrderPrint();
+
+        System.out.println("\nPost order:");
+        myBst.postOrderPrint();
     }
 }
