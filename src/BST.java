@@ -22,7 +22,8 @@ public class BST {
     public Node getRoot() {
         return root;
     }
-// Edit tree methods
+
+// Methods that edit the tree
     // Accessible insert method to call private recursive method
     public void insert(int value) { root = rInsert(root, value); }
     private Node rInsert(Node currentNode, int value) {
@@ -77,7 +78,7 @@ public class BST {
         return currentNode.value;
     }
 
-// Print methods
+// DFS methods
     public ArrayList<Integer> inOrderPrint() {
         // Depth first search, visits nodes from smallest value to largest
         if (root == null) return null;
