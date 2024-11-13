@@ -40,6 +40,7 @@ public class BST {
 
     public ArrayList<Integer> inOrderPrint() {
         // Depth first search, visits nodes from smallest value to largest
+        if (root == null) return null;
         ArrayList<Integer> results = new ArrayList<>(numOfNodes);
         class Traverse {
             public Traverse(Node currentNode) {
@@ -57,6 +58,7 @@ public class BST {
 
     public ArrayList<Integer> preOrderPrint() {
         // Depth first search, visits current node before visiting children
+        if (root == null) return null;
         ArrayList<Integer> results = new ArrayList<>(numOfNodes);
         // Create recursive traverse method
         class Traverse {
@@ -75,6 +77,7 @@ public class BST {
 
     public ArrayList<Integer> postOrderPrint() {
         // Depth first search, visits nodes children first, then goes to parents
+        if (root == null) return null;
         ArrayList<Integer> results = new ArrayList<>(numOfNodes);
         // Create recursive traverse method
         class Traverse {
