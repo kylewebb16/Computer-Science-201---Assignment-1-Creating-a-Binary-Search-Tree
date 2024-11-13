@@ -17,5 +17,8 @@ public class Main {
 
         System.out.println("\nPost order:");
         myBst.postOrderPrint();
+
+        myBst.deleteNode(10);
+        System.out.println(myBst.getRoot().value);
     }
 }

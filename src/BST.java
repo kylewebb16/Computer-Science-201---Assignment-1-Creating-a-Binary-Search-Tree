@@ -12,6 +12,8 @@ public class BST {
     }
     private Node root;
     private int numOfNodes;
+
+    // Constructor
     public BST() {
         this.root = null;
         this.numOfNodes = 0;
@@ -20,11 +22,9 @@ public class BST {
     public Node getRoot() {
         return root;
     }
-
+// Edit tree methods
     // Accessible insert method to call private recursive method
-    public void insert(int value) {
-        root = rInsert(root, value);
-    }
+    public void insert(int value) { root = rInsert(root, value); }
     private Node rInsert(Node currentNode, int value) {
         // Base case: if current Node is null, return new Node(value)
         if (currentNode == null) {
@@ -38,6 +38,46 @@ public class BST {
         return currentNode;
     }
 
+    public void deleteNode(int value) { root = deleteNode(root, value); }
+    private Node deleteNode(Node currentNode, int value) {
+        if (currentNode == null) return null;
+        // Traverse tree, search for value
+        if (value < currentNode.value) currentNode.left = deleteNode(currentNode.left, value);
+        else if (value > currentNode.value) currentNode.right = deleteNode(currentNode.right, value);
+        else { // value == currentNode.value
+            // No child nodes
+            if (currentNode.left == null && currentNode.right == null) {
+                return null;
+            }
+            // right child only
+            else if (currentNode.left == null) {
+                currentNode = currentNode.right;
+            }
+            // left child only
+            else if (currentNode.right == null) {
+                currentNode = currentNode.left;
+            }
+            // Two child nodes, replace current with smallest value in right subtree, delete smallest
+            else {
+                int subTreeMin = minValue(currentNode.right);
+                currentNode.value = subTreeMin;
+                currentNode.right = deleteNode(currentNode.right, subTreeMin);
+
+            }
+        }
+
+        
+        
+        return currentNode;
+    }
+    private int minValue(Node currentNode) {
+        while (currentNode.left != null) {
+            currentNode = currentNode.left;
+        }
+        return currentNode.value;
+    }
+
+// Print methods
     public ArrayList<Integer> inOrderPrint() {
         // Depth first search, visits nodes from smallest value to largest
         if (root == null) return null;
