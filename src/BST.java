@@ -12,21 +12,33 @@ public class BST {
     public BST() {
         this.root = null;
     }
-    public boolean insert(int value) {
-        Node newNode = new Node(value);
-        if (this.root == null) {
-            this.root = newNode;
-            return true;
+
+    public Node getRoot() {
+        return root;
+    }
+
+    // Accessible insert method to call private recursive method
+    public void insert(int value) {
+        root = rInsert(root, value);
+    }
+    // Private recursive insert method
+    private Node rInsert(Node currentNode, int value) {
+        // Base case: if current Node is null, return new Node(value)
+        if (currentNode == null) {
+            return new Node(value);
         }
-        Node currentNode = this.root;
-        while (true) {
-            if (value < currentNode.value) {
-                if (currentNode.left == null) {
-                    // Left off here
-                }
-            }
+
+        // check if val is less than, or greater than currentNode.val
+            // recursive call rInsert on appropriate child node
+        if (value < currentNode.value) {
+            currentNode.left = rInsert(currentNode.left, value);
         }
-        return false;
+        else if (value > currentNode.value) {
+            currentNode.right = rInsert(currentNode.right, value);
+        }
+
+        // return currentNode
+        return currentNode;
     }
 
 }
