@@ -13,7 +13,8 @@ public class BST {
     private Node root;
     private int numOfNodes;
 
-    // Constructor
+    // 1
+    // Constructor 
     public BST() {
         this.root = null;
         this.numOfNodes = 0;
@@ -24,8 +25,11 @@ public class BST {
     }
 
 // Methods that edit the tree
+
+    // 2
     // Accessible insert method to call private recursive method
     public void insert(int value) { root = rInsert(root, value); }
+
     private Node rInsert(Node currentNode, int value) {
         // Base case: if current Node is null, return new Node(value)
         if (currentNode == null) {
@@ -38,7 +42,7 @@ public class BST {
 
         return currentNode;
     }
-
+    // 3
     public void deleteNode(int value) { root = deleteNode(root, value); }
     private Node deleteNode(Node currentNode, int value) {
         if (currentNode == null) return null;
@@ -79,6 +83,7 @@ public class BST {
     }
 
 // DFS methods
+    // 4
     public ArrayList<Integer> inOrderPrint() {
         // Depth first search, visits nodes from smallest value to largest
         if (root == null) return null;
@@ -97,6 +102,7 @@ public class BST {
         return results;
     }
 
+    // 5
     public ArrayList<Integer> preOrderPrint() {
         // Depth first search, visits current node before visiting children
         if (root == null) return null;
@@ -116,6 +122,7 @@ public class BST {
         return results;
     }
 
+    // 6
     public ArrayList<Integer> postOrderPrint() {
         // Depth first search, visits nodes children first, then goes to parents
         if (root == null) return null;
