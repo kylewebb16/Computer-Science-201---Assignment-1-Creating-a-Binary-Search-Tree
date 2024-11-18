@@ -24,6 +24,10 @@ public class BST {
         return root;
     }
 
+    public int getNumOfNodes() {
+        return numOfNodes;
+    }
+
 // Methods that edit the tree
 
     // 2
@@ -52,15 +56,18 @@ public class BST {
         else { // value == currentNode.value
             // No child nodes
             if (currentNode.left == null && currentNode.right == null) {
+                numOfNodes--;
                 return null;
             }
             // right child only
             else if (currentNode.left == null) {
                 currentNode = currentNode.right;
+                numOfNodes--;
             }
             // left child only
             else if (currentNode.right == null) {
                 currentNode = currentNode.left;
+                numOfNodes--;
             }
             // Two child nodes, replace current with smallest value in right subtree, delete smallest
             else {
@@ -70,9 +77,6 @@ public class BST {
 
             }
         }
-
-        
-        
         return currentNode;
     }
     private int minValue(Node currentNode) {
@@ -118,7 +122,6 @@ public class BST {
         }
         new Traverse(root);
 
-        System.out.println(results);
         return results;
     }
 
@@ -138,7 +141,6 @@ public class BST {
             }
         }
         new Traverse(root);
-        System.out.println(results);
         return results;
     }
 

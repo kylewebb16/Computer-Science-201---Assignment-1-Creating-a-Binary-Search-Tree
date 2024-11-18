@@ -152,14 +152,14 @@ public class Main {
                 if (myBst == null) {
                     myBst = new BST();
                     nodeAddButton.setEnabled(true);
-                    deleteNodeButton.setEnabled(true);
-                    inOrderButton.setEnabled(true);
-                    preOrderButton.setEnabled(true);
-                    postOrdButton.setEnabled(true);
                 } else {
                         int choice = JOptionPane.showConfirmDialog(frame, "You have already created a binary search tree. \nIf you create a new tree, the current tree will be deleted. \nDo you want to continue?");
                         if (choice == JOptionPane.YES_OPTION) {
                             myBst = new BST();
+                            deleteNodeButton.setEnabled(false);
+                            inOrderButton.setEnabled(false);
+                            preOrderButton.setEnabled(false);
+                            postOrdButton.setEnabled(false);
                         } else {
                             JOptionPane.showMessageDialog(frame, "Canceled create new search tree");
                         }
@@ -174,6 +174,12 @@ public class Main {
                     int userInput = Integer.parseInt(JOptionPane.showInputDialog(frame, "Enter value of new node:"));
                     myBst.insert(userInput);
                     JOptionPane.showMessageDialog(frame, "Success, added " + userInput + " to tree!");
+                    if (!deleteNodeButton.isEnabled()) {
+                        deleteNodeButton.setEnabled(true);
+                        inOrderButton.setEnabled(true);
+                        preOrderButton.setEnabled(true);
+                        postOrdButton.setEnabled(true);
+                    }
                     
                 } catch (NumberFormatException numErr) {
                     // TODO: handle exception
@@ -193,6 +199,12 @@ public class Main {
                     int userInput = Integer.parseInt(JOptionPane.showInputDialog(frame, "Enter value of the node you want to delete:"));
                     myBst.deleteNode(userInput);
                     JOptionPane.showMessageDialog(frame, "Removed " + userInput + " from tree");
+                    if (myBst.getNumOfNodes() < 1) {
+                        deleteNodeButton.setEnabled(false);
+                        inOrderButton.setEnabled(false);
+                        preOrderButton.setEnabled(false);
+                        postOrdButton.setEnabled(false);
+                    }
                 } catch (NumberFormatException numErr) {
                     // TODO: handle exception
                     JOptionPane.showMessageDialog(frame, "Please enter an integer (0,1,2,3...)", "Invalid input", JOptionPane.ERROR_MESSAGE);
@@ -209,7 +221,7 @@ public class Main {
                 if (myBst != null) {
                     ArrayList<Integer> results = myBst.inOrderPrint();
                     if (results != null) {
-                        JOptionPane.showMessageDialog(frame, results, "Depth first Search Tree: in order", JOptionPane.DEFAULT_OPTION);
+                        JOptionPane.showMessageDialog(frame, "Tree In Order:\n" + results, "Tree: In Order", JOptionPane.DEFAULT_OPTION);
                     } else {
                         JOptionPane.showMessageDialog(frame, "Tree is empty", "Empty tree", JOptionPane.ERROR_MESSAGE);
                     }
@@ -219,7 +231,15 @@ public class Main {
             }
         });
         
-
+        preOrderButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ArrayList<Integer> results = myBst.preOrderPrint();
+                if (results != null) {
+                    JOptionPane.showMessageDialog(frame, "Tree Pre Order:\n" + results, "Tree: Pre Order", JOptionPane.DEFAULT_OPTION);
+                }
+            }
+        });
         
         // Add components
         centerPanel.add(createBSTButton, b1);
@@ -230,7 +250,6 @@ public class Main {
         centerPanel.add(postOrdButton, b6);
         centerPanel.add(exitProgramButton, b7);
         
-
         frame.getContentPane().add(centerPanel, BorderLayout.CENTER);
     }
     
