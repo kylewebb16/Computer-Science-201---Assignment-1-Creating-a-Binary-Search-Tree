@@ -3,6 +3,7 @@ import javax.swing.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -11,14 +12,16 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class Main {
+    // Allows for GUI to create and access tree
     public static BST myBst;
     public static void main(String[] args) {
-        GUI(); 
+        createGUI(); 
         
     }
 
-    public static void GUI() {
-        // General pane properties
+    // Creates main JFrame and adds components from helper methods
+    public static void createGUI() {
+        // General frame properties
         JFrame frame = new JFrame("Binary Search Tree");
         frame.setLayout(new BorderLayout());
         JFrame.setDefaultLookAndFeelDecorated(true);
@@ -27,23 +30,38 @@ public class Main {
         ImageIcon image = new ImageIcon("../images/binary-tree.png");
         frame.setIconImage(image.getImage());
 
+        createInstructionsPanel(frame);
+
+        createButtonsPanel(frame);
+
+        frame.pack();
+        frame.setVisible(true);
+    }
 
 
+    public static void createInstructionsPanel(JFrame frame) {
         // Create top panel with instructions
         JPanel instructionsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         instructionsPanel.setBorder(BorderFactory.createLineBorder(Color.black));
-        JLabel directionsLabel = new JLabel("Use your keyboard or the buttons below to create, modify, and search your binary search tree.");
+        JLabel directionsLabel = new JLabel("Use your keyboard, or the buttons below to create, modify, and search your binary search tree.");
+        Font labelFont = new Font("Arial", Font.PLAIN, 20);
+        directionsLabel.setFont(labelFont);
         directionsLabel.setHorizontalAlignment(JLabel.CENTER);
         instructionsPanel.add(directionsLabel, BorderLayout.CENTER);
         frame.getContentPane().add(instructionsPanel, BorderLayout.PAGE_START);
+    }
+    
 
-
-
-        // Create center panel with buttons
+    // Create a panel with specified buttons to control the tree from the GUI
+    public static void createButtonsPanel(JFrame frame) {
+        Font buttonFont = new Font("Arial", Font.BOLD, 16);
         JPanel centerPanel = new JPanel(new GridBagLayout());
         centerPanel.setBorder(BorderFactory.createLineBorder(Color.RED)); // Delete later
-        
+        boolean treeExists = false;
+
+        // Button 1: Create a binary search tree
         JButton createBSTButton = new JButton("1. Create a new Binary Search Tree");
+        createBSTButton.setFont(buttonFont);
         GridBagConstraints b1 = new GridBagConstraints();
         b1.insets = new Insets(2, 5, 2, 5);
         b1.fill = GridBagConstraints.HORIZONTAL;
@@ -51,32 +69,104 @@ public class Main {
         b1.gridy = 0;
         b1.gridwidth = 3;
         b1.ipady = 50;
-        createBSTButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (myBst == null) {
-                    myBst = new BST();
-                } else {
-                        int choice = JOptionPane.showConfirmDialog(frame, "You have already created a binary search tree. \nIf you create a new one, the old one will be deleted. \nDo you want to continue?");
-                        if (choice == JOptionPane.YES_OPTION) {
-                            myBst = new BST();
-
-                        } else {
-                            JOptionPane.showMessageDialog(frame, "Canceled create new search tree");
-                        }
-                }
-            }
-        });
-        centerPanel.add(createBSTButton, b1);
-
+        
+        // Button 2: Add a node
         JButton nodeAddButton = new JButton("2. Add a Node");
+        nodeAddButton.setFont(buttonFont);
         GridBagConstraints b2 = new GridBagConstraints();
+        nodeAddButton.setEnabled(treeExists);
         b2.insets = new Insets(2, 5, 2, 5);
         b2.fill = GridBagConstraints.HORIZONTAL;
         b2.gridx = 0;
         b2.gridy = 1;
         b2.gridwidth = 1;
         b2.ipady = 20;
+        
+
+        // Button 3: Delete a node
+        JButton deleteNodeButton = new JButton("3. Delete a Node");
+        deleteNodeButton.setFont(buttonFont);
+        deleteNodeButton.setEnabled(treeExists);
+        GridBagConstraints b3 = new GridBagConstraints();
+        b3.fill = GridBagConstraints.HORIZONTAL;
+        b3.insets = new Insets(2, 5, 2, 5);
+        b3.gridx = 1;
+        b3.gridy = 1;
+        b3.gridwidth = 1;
+        b3.ipady = 20;
+        
+        // Button 4: Print nodes DFS-In Order
+        JButton inOrderButton = new JButton("4. Print Nodes in Order");
+        inOrderButton.setFont(buttonFont);
+        inOrderButton.setEnabled(treeExists);
+        GridBagConstraints b4 = new GridBagConstraints();
+        b4.fill = GridBagConstraints.HORIZONTAL;
+        b4.insets = new Insets(2, 5, 2, 5);
+        b4.gridx = 0;
+        b4.gridy = 2;
+        b4.gridwidth = 1;
+        b4.ipady = 20;
+        
+        
+        // Button 5: Print nodes DFS- pre order
+        JButton preOrderButton = new JButton("5. Print Nodes in Pre Order");
+        preOrderButton.setFont(buttonFont);
+        preOrderButton.setEnabled(treeExists);
+        GridBagConstraints b5 = new GridBagConstraints();
+        b5.fill = GridBagConstraints.HORIZONTAL;
+        b5.insets = new Insets(2, 5, 2, 5);
+        b5.gridx = 1;
+        b5.gridy = 2;
+        b5.gridwidth = 1;
+        b5.ipady = 20;
+
+        // Button 6: Print nodes in DFS- post order 
+        JButton postOrdButton = new JButton("6. Print Nodes in Post Order");
+        postOrdButton.setFont(buttonFont);
+        postOrdButton.setEnabled(treeExists);
+        GridBagConstraints b6 = new GridBagConstraints();
+        b6.fill = GridBagConstraints.HORIZONTAL;
+        b6.insets = new Insets(2, 5, 2, 5);
+        b6.gridx = 0;
+        b6.gridy = 3;
+        b6.gridwidth = 1;
+        b6.ipady = 20;
+        
+        // Button 7: exit the program
+        JButton exitProgramButton = new JButton("Exit");
+        exitProgramButton.setFont(buttonFont);
+        GridBagConstraints b7 = new GridBagConstraints();
+        b7.fill = GridBagConstraints.HORIZONTAL;
+        b7.insets = new Insets(2, 5, 2, 5);
+        b7.gridx = 1;
+        b7.gridy = 3;
+        b7.gridwidth = 1;
+        b7.ipady = 20;
+
+
+        // Action listeners
+        createBSTButton.addActionListener(new ActionListener() {
+            // Create a new BST, if one is already created, confirm deletion of previous
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (myBst == null) {
+                    myBst = new BST();
+                    nodeAddButton.setEnabled(true);
+                    deleteNodeButton.setEnabled(true);
+                    inOrderButton.setEnabled(true);
+                    preOrderButton.setEnabled(true);
+                    postOrdButton.setEnabled(true);
+                } else {
+                        int choice = JOptionPane.showConfirmDialog(frame, "You have already created a binary search tree. \nIf you create a new tree, the current tree will be deleted. \nDo you want to continue?");
+                        if (choice == JOptionPane.YES_OPTION) {
+                            myBst = new BST();
+                        } else {
+                            JOptionPane.showMessageDialog(frame, "Canceled create new search tree");
+                        }
+                }
+            }
+        });
+        
         nodeAddButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -95,16 +185,7 @@ public class Main {
                 }
             }
         });
-        centerPanel.add(nodeAddButton, b2);
-
-        JButton deleteNodeButton = new JButton("3. Delete a Node");
-        GridBagConstraints b3 = new GridBagConstraints();
-        b3.fill = GridBagConstraints.HORIZONTAL;
-        b3.insets = new Insets(2, 5, 2, 5);
-        b3.gridx = 1;
-        b3.gridy = 1;
-        b3.gridwidth = 1;
-        b3.ipady = 20;
+        
         deleteNodeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -112,7 +193,6 @@ public class Main {
                     int userInput = Integer.parseInt(JOptionPane.showInputDialog(frame, "Enter value of the node you want to delete:"));
                     myBst.deleteNode(userInput);
                     JOptionPane.showMessageDialog(frame, "Removed " + userInput + " from tree");
-                    
                 } catch (NumberFormatException numErr) {
                     // TODO: handle exception
                     JOptionPane.showMessageDialog(frame, "Please enter an integer (0,1,2,3...)", "Invalid input", JOptionPane.ERROR_MESSAGE);
@@ -122,61 +202,36 @@ public class Main {
                 }
             }
         });
-        centerPanel.add(deleteNodeButton, b3);
-        
-        JButton inOrderButton = new JButton("4. Print Nodes in Order");
-        GridBagConstraints b4 = new GridBagConstraints();
-        b4.fill = GridBagConstraints.HORIZONTAL;
-        b4.insets = new Insets(2, 5, 2, 5);
-        b4.gridx = 0;
-        b4.gridy = 2;
-        b4.gridwidth = 1;
-        b4.ipady = 20;
+
         inOrderButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ArrayList<Integer> results = myBst.inOrderPrint();
-                if (results != null) {
-                    JOptionPane.showMessageDialog(frame, results, "Search Tree in order", JOptionPane.DEFAULT_OPTION);
+                if (myBst != null) {
+                    ArrayList<Integer> results = myBst.inOrderPrint();
+                    if (results != null) {
+                        JOptionPane.showMessageDialog(frame, results, "Depth first Search Tree: in order", JOptionPane.DEFAULT_OPTION);
+                    } else {
+                        JOptionPane.showMessageDialog(frame, "Tree is empty", "Empty tree", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(frame, "Tree does not exist\n" + "Create a new tree first", "Tree does not exist", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
+        
+
+        
+        // Add components
+        centerPanel.add(createBSTButton, b1);
+        centerPanel.add(nodeAddButton, b2);
+        centerPanel.add(deleteNodeButton, b3);
         centerPanel.add(inOrderButton, b4);
-        
-        JButton preOrderButton = new JButton("5. Print Nodes in Pre Order");
-        GridBagConstraints b5 = new GridBagConstraints();
-        b5.fill = GridBagConstraints.HORIZONTAL;
-        b5.insets = new Insets(2, 5, 2, 5);
-        b5.gridx = 1;
-        b5.gridy = 2;
-        b5.gridwidth = 1;
-        b5.ipady = 20;
         centerPanel.add(preOrderButton, b5);
-        
-        JButton postOrdButton = new JButton("6. Print Nodes in Post Order");
-        GridBagConstraints b6 = new GridBagConstraints();
-        b6.fill = GridBagConstraints.HORIZONTAL;
-        b6.insets = new Insets(2, 5, 2, 5);
-        b6.gridx = 0;
-        b6.gridy = 3;
-        b6.gridwidth = 1;
-        b6.ipady = 20;
         centerPanel.add(postOrdButton, b6);
-        
-        JButton exitProgramButton = new JButton("Exit");
-        GridBagConstraints b7 = new GridBagConstraints();
-        b7.fill = GridBagConstraints.HORIZONTAL;
-        b7.insets = new Insets(2, 5, 2, 5);
-        b7.gridx = 1;
-        b7.gridy = 3;
-        b7.gridwidth = 1;
-        b7.ipady = 20;
         centerPanel.add(exitProgramButton, b7);
+        
 
-
-        // Add components to frame and show once finished
         frame.getContentPane().add(centerPanel, BorderLayout.CENTER);
-        frame.pack();
-        frame.setVisible(true);
     }
+    
 }
