@@ -145,6 +145,7 @@ public class Main {
 
 
         // Action listeners
+        // Action button1Action = new Action(){};  Left off here
         createBSTButton1.addActionListener(new ActionListener() {
             // Create a new BST, if one is already created, confirm deletion of previous
             @Override
