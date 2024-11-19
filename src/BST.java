@@ -102,7 +102,6 @@ public class BST {
             }
         }
         new Traverse(root);
-        System.out.println(results);
         return results;
     }
 
@@ -141,6 +140,7 @@ public class BST {
             }
         }
         new Traverse(root);
+        
         return results;
     }
 
