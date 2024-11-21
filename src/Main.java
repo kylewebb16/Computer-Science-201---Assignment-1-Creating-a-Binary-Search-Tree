@@ -146,8 +146,7 @@ public class Main {
 
         // Action listeners
         // Action button1Action = new Action(){};  Left off here
-        createBSTButton1.addActionListener(new ActionListener() {
-            // Create a new BST, if one is already created, confirm deletion of previous
+        Action createBSTAction = new AbstractAction("createTree") {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (myBst == null) {
@@ -166,9 +165,12 @@ public class Main {
                         }
                 }
             }
-        });
+        };
+        createBSTButton1.addActionListener(createBSTAction);
+        createBSTButton1.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("1"), "createTree");
+        createBSTButton1.getActionMap().put("createTree", createBSTAction);
         
-        nodeAddButton2.addActionListener(new ActionListener() {
+        Action addNodeAction = new AbstractAction("addNode") {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -182,18 +184,21 @@ public class Main {
                         postOrderButton6.setEnabled(true);
                     }
                     
-                } catch (NumberFormatException numErr) {
+                    } catch (NumberFormatException numErr) {
                     // TODO: handle exception
                     JOptionPane.showMessageDialog(frame, "Failed to add node. \nPlease enter an integer.", "Invalid input", JOptionPane.ERROR_MESSAGE);
-                }
-                catch (NullPointerException ptrErr) {
+                    }
+                    catch (NullPointerException ptrErr) {
                     JOptionPane.showMessageDialog(frame, "Create a binary search tree first. \n(Try using button 1)", "No Tree exists", JOptionPane.ERROR_MESSAGE);
                     System.err.println("Create a Binary Search Tree First! (Use button 1)");
                 }
             }
-        });
+        };
+        nodeAddButton2.addActionListener(addNodeAction);
+        nodeAddButton2.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("2"), "addNode");
+        nodeAddButton2.getActionMap().put("addNode", addNodeAction);
         
-        deleteNodeButton3.addActionListener(new ActionListener() {
+        Action deleteNodeAction = new AbstractAction("deleteNode") {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -207,14 +212,16 @@ public class Main {
                         postOrderButton6.setEnabled(false);
                     }
                 } catch (NumberFormatException numErr) {
-                    // TODO: handle exception
                     JOptionPane.showMessageDialog(frame, "Please enter an integer (0,1,2,3...)", "Invalid input", JOptionPane.ERROR_MESSAGE);
                 }
                 catch (NullPointerException ptrErr) {
                     JOptionPane.showMessageDialog(frame, "Create a binary search tree first. \n(Try using button 1)", "No Tree exists", JOptionPane.ERROR_MESSAGE);
                 }
             }
-        });
+        };
+        deleteNodeButton3.addActionListener(deleteNodeAction);
+        deleteNodeButton3.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("3"), "deleteNode");
+        deleteNodeButton3.getActionMap().put("deleteNode", deleteNodeAction);        
 
         inOrderButton4.addActionListener(new ActionListener() {
             @Override
