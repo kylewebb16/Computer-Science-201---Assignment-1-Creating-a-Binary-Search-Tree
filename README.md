@@ -27,8 +27,8 @@ The application must address the following requirements:
 6. Print nodes by PostOrder    (@src/BST.java line: 133)
 7. Exit program    (@src/Main.java line: 265)
 - When a user selects (1) Create a binary search tree, the application creates a binary search tree with the given data (1, 2, 3, 4, 5, 6, 7). To keep the binary search tree balanced at all times, follow these rules: 
-- (1) the child nodes on the left must have a search key value less than that of the root node and 
-- (2) the child nodes on the right must have search key values greater than that of the root node.
+  - (1) the child nodes on the left must have a search key value less than that of the root node and 
+  - (2) the child nodes on the right must have search key values greater than that of the root node.
 The given numbers must be assigned as shown in the figure below.
 
 ![diagram](./images/cs201-1-diagram.jpeg "Diagram")
