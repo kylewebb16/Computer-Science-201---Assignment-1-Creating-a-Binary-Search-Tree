@@ -6,6 +6,7 @@ public class BST {
         public Node left;
         public Node right;
 
+        // Node constructor
         Node(int value) {
             this.value = value;
         }
@@ -13,7 +14,7 @@ public class BST {
     private Node root;
     private int numOfNodes;
 
-    // 1
+    // 1st assignment requirement
     // Constructor 
     public BST() {
         this.root = null;
@@ -28,10 +29,11 @@ public class BST {
         return numOfNodes;
     }
 
+    
 // Methods that edit the tree
 
-    // 2
-    // Accessible insert method to call private recursive method
+    // 2nd assignment requirement
+    // Accessible insert method to call private recursive method on root
     public void insert(int value) { root = rInsert(root, value); }
 
     private Node rInsert(Node currentNode, int value) {
@@ -46,7 +48,7 @@ public class BST {
 
         return currentNode;
     }
-    // 3
+    // 3rd assignment requirement 
     public void deleteNode(int value) { root = deleteNode(root, value); }
     private Node deleteNode(Node currentNode, int value) {
         if (currentNode == null) return null;
@@ -79,6 +81,7 @@ public class BST {
         }
         return currentNode;
     }
+    // Helper method for deleteNode, finds smallest node in subtree
     private int minValue(Node currentNode) {
         while (currentNode.left != null) {
             currentNode = currentNode.left;
@@ -86,12 +89,14 @@ public class BST {
         return currentNode.value;
     }
 
+
 // DFS methods
-    // 4
+    // 4th assignment requirement
     public ArrayList<Integer> inOrderPrint() {
         // Depth first search, visits nodes from smallest value to largest
         if (root == null) return null;
         ArrayList<Integer> results = new ArrayList<>(numOfNodes);
+        // Recursively search the tree
         class Traverse {
             public Traverse(Node currentNode) {
                 // Searches left first every time, then adds value
@@ -105,7 +110,7 @@ public class BST {
         return results;
     }
 
-    // 5
+    // 5th assignment requirement
     public ArrayList<Integer> preOrderPrint() {
         // Depth first search, visits current node before visiting children
         if (root == null) return null;
@@ -124,7 +129,7 @@ public class BST {
         return results;
     }
 
-    // 6
+    // 6th assignment requirement
     public ArrayList<Integer> postOrderPrint() {
         // Depth first search, visits nodes children first, then goes to parents
         if (root == null) return null;
@@ -144,4 +149,5 @@ public class BST {
         return results;
     }
 
+    // 7th assignment requirement @src/Main.java 
 }

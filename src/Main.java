@@ -22,7 +22,7 @@ public class Main {
     public static void createGUI() {
         // General frame properties
         JFrame frame = new JFrame("Binary Search Tree");
-        frame.setLayout(new BorderLayout());
+        frame.setLayout(new BorderLayout()); 
         JFrame.setDefaultLookAndFeelDecorated(true);
         frame.setSize(1280, 720);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -50,7 +50,6 @@ public class Main {
         instructionsPanel.add(directionsLabel);
         frame.getContentPane().add(instructionsPanel, BorderLayout.PAGE_START);
     }
-    
 
     // Create a panel with specified buttons to control the tree from the GUI
     public static void createButtonsPanel(JFrame frame) {
@@ -180,12 +179,11 @@ public class Main {
                         preOrderButton5.setEnabled(true);
                         postOrderButton6.setEnabled(true);
                     }
-                    
-                    } catch (NumberFormatException numErr) {
-                    // TODO: handle exception
+                } 
+                catch (NumberFormatException numErr) {
                     JOptionPane.showMessageDialog(frame, "Failed to add node. \nPlease enter an integer.", "Invalid input", JOptionPane.ERROR_MESSAGE);
-                    }
-                    catch (NullPointerException ptrErr) {
+                } 
+                catch (NullPointerException ptrErr) {
                     JOptionPane.showMessageDialog(frame, "Create a binary search tree first. \n(Try using button 1)", "No Tree exists", JOptionPane.ERROR_MESSAGE);
                     System.err.println("Create a Binary Search Tree First! (Use button 1)");
                 }
@@ -208,7 +206,8 @@ public class Main {
                         preOrderButton5.setEnabled(false);
                         postOrderButton6.setEnabled(false);
                     }
-                } catch (NumberFormatException numErr) {
+                } 
+                catch (NumberFormatException numErr) {
                     JOptionPane.showMessageDialog(frame, "Please enter an integer (0,1,2,3...)", "Invalid input", JOptionPane.ERROR_MESSAGE);
                 }
                 catch (NullPointerException ptrErr) {
