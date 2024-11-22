@@ -19,13 +19,20 @@ The application must address the following requirements:
 - Include a user interface allowing a user to interact with the binary search tree.
 - When a user runs the application, it displays a menu and prompts the user to select an option.
 - The menu options are:
-1. Create a binary search tree  (@src/BST.java line 19)
-2. Add a node   (@src/BST.java line: 39)
-3. Delete a node    (@src/BST.java line: 52)
-4. Print nodes by InOrder   (@src/BST.java line: 95)
-5. Print nodes by PreOrder  (@src/BST.java line: 114)
-6. Print nodes by PostOrder    (@src/BST.java line: 133)
-7. Exit program    (@src/Main.java line: 265)
+1. Create a binary search tree  
+  - (@src/BST.java line 19)
+2. Add a node   
+  - (@src/BST.java line: 39)
+3. Delete a node    
+  - (@src/BST.java line: 52)
+4. Print nodes by InOrder   
+  - (@src/BST.java line: 95)
+5. Print nodes by PreOrder  
+  - (@src/BST.java line: 114)
+6. Print nodes by PostOrder    
+  - (@src/BST.java line: 133)
+7. Exit program    
+  - (@src/Main.java line: 265)
 - When a user selects (1) Create a binary search tree, the application creates a binary search tree with the given data (1, 2, 3, 4, 5, 6, 7). To keep the binary search tree balanced at all times, follow these rules: 
   - (1) the child nodes on the left must have a search key value less than that of the root node and 
   - (2) the child nodes on the right must have search key values greater than that of the root node.
