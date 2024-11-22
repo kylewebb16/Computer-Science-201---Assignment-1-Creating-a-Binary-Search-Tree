@@ -1,7 +1,20 @@
-# About this Assignment
+# Instructions:
+Clone the repository and use src/./build.sh to compile and run the program
+Once the GUI appears use the buttons or keyboard bindings to interact with the application.
+1. Create a binary search tree
+2. Add a node
+3. Delete a node
+4. Print nodes by InOrder
+5. Print nodes by PreOrder
+6. Print nodes by PostOrder
+7. Exit program
+
+# Assignment Specifications:
+
+## About this Assignment
 In this course, you have learned about trees in data structure, binary trees, and binary search trees. For this assignment, you will develop an application using the Java programming language.
 
-# Assignment Prompt
+## Assignment Prompt
 The application must address the following requirements:
 
 - Include a user interface allowing a user to interact with the binary search tree.
