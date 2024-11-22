@@ -13,8 +13,6 @@ Once the GUI appears use the buttons or keyboard bindings to interact with the a
 
 # Assignment Specifications:
 
-## 
-
 ## Assignment Prompt
 The application must address the following requirements:
 
