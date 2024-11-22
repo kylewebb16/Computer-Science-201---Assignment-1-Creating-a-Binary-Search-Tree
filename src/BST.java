@@ -18,7 +18,14 @@ public class BST {
     // Constructor 
     public BST() {
         this.root = null;
-        this.numOfNodes = 0;
+        this.numOfNodes = 7;
+        this.insert(4);
+        this.insert(2);
+        this.insert(6);
+        this.insert(1);
+        this.insert(3);
+        this.insert(5);
+        this.insert(7);
     }
 
     public Node getRoot() {

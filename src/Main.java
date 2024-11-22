@@ -148,14 +148,14 @@ public class Main {
                 if (myBst == null) {
                     myBst = new BST();
                     nodeAddButton2.setEnabled(true);
+                    deleteNodeButton3.setEnabled(true);
+                    inOrderButton4.setEnabled(true);
+                    preOrderButton5.setEnabled(true);
+                    postOrderButton6.setEnabled(true);
                 } else {
                         int choice = JOptionPane.showConfirmDialog(frame, "<html><center>Creating a new tree will <u>destroy the current tree</u><br>Do you want to continue?</html>");
                         if (choice == JOptionPane.YES_OPTION) {
                             myBst = new BST();
-                            deleteNodeButton3.setEnabled(false);
-                            inOrderButton4.setEnabled(false);
-                            preOrderButton5.setEnabled(false);
-                            postOrderButton6.setEnabled(false);
                         } else {
                             JOptionPane.showMessageDialog(frame, "Canceled create new search tree");
                         }
