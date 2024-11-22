@@ -8,7 +8,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class Main {
@@ -16,8 +15,8 @@ public class Main {
     public static BST myBst;
     public static void main(String[] args) {
         createGUI(); 
-        
     }
+
 
     // Creates main JFrame and adds components from helper methods
     public static void createGUI() {
@@ -39,6 +38,7 @@ public class Main {
     }
 
 
+    // Panel with directions for user
     public static void createInstructionsPanel(JFrame frame) {
         // Create top panel with instructions
         JPanel instructionsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -82,7 +82,6 @@ public class Main {
         b2.gridwidth = 1;
         b2.ipady = 20;
         
-
         // Button 3: Delete a node
         JButton deleteNodeButton3 = new JButton("3. Delete a Node");
         deleteNodeButton3.setFont(buttonFont);
@@ -106,7 +105,6 @@ public class Main {
         b4.gridy = 2;
         b4.gridwidth = 1;
         b4.ipady = 20;
-        
         
         // Button 5: Print nodes DFS- pre order
         JButton preOrderButton5 = new JButton("5. Print Nodes in Pre Order");
@@ -144,8 +142,7 @@ public class Main {
         b7.ipady = 20;
 
 
-        // Action listeners
-        // Action button1Action = new Action(){};  Left off here
+        // Button actions
         Action createBSTAction = new AbstractAction("createTree") {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -223,7 +220,7 @@ public class Main {
         deleteNodeButton3.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("3"), "deleteNode");
         deleteNodeButton3.getActionMap().put("deleteNode", deleteNodeAction);        
 
-        inOrderButton4.addActionListener(new ActionListener() {
+        Action inOrderPrint = new AbstractAction("printInOrder") {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (myBst != null) {
@@ -237,26 +234,36 @@ public class Main {
                     JOptionPane.showMessageDialog(frame, "Tree does not exist\n" + "Create a new tree first", "Tree does not exist", JOptionPane.ERROR_MESSAGE);
                 }
             }
-        });
+            
+        };
+        inOrderButton4.addActionListener(inOrderPrint);
+        inOrderButton4.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("4"), "printInOrder");
+        inOrderButton4.getActionMap().put("printInOrder", inOrderPrint);
         
-        preOrderButton5.addActionListener(new ActionListener() {
+        Action preOrderAction = new AbstractAction("printPreOrder") {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ArrayList<Integer> results = myBst.preOrderPrint();
                 JOptionPane.showMessageDialog(frame, "Tree Pre Order:\n" + results, "Tree: Pre Order", JOptionPane.DEFAULT_OPTION);
             }
-        });
+        };
+        preOrderButton5.addActionListener(preOrderAction);
+        preOrderButton5.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("5"), "printPreOrder");
+        preOrderButton5.getActionMap().put("printPreOrder", preOrderAction);
 
-        postOrderButton6.addActionListener(new ActionListener() {
+        Action postOrderPrintAction = new AbstractAction("printPostOrder") {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ArrayList<Integer> results = myBst.postOrderPrint();
                 JOptionPane.showMessageDialog(frame, "Tree Post Order:\n" + results, "Tree: Post Order", JOptionPane.DEFAULT_OPTION);
-
+    
             }
-        });
+        };
+        postOrderButton6.addActionListener(postOrderPrintAction);
+        postOrderButton6.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("6"), "printPostOrder");
+        postOrderButton6.getActionMap().put("printPostOrder", postOrderPrintAction);
 
-        exitProgramButton7.addActionListener(new ActionListener() {
+        Action exitAction = new AbstractAction("exitAction") {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int choice = JOptionPane.showConfirmDialog(frame, "Confirm: Do you want to exit the program?", "Exit Program", JOptionPane.YES_NO_CANCEL_OPTION);
@@ -267,7 +274,10 @@ public class Main {
                     JOptionPane.showMessageDialog(frame, "Exit caneceled", "Returning to program", JOptionPane.DEFAULT_OPTION);
                 }
             }
-        });
+        };
+        exitProgramButton7.addActionListener(exitAction);
+        exitProgramButton7.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("7"), "exitAction");
+        exitProgramButton7.getActionMap().put("exitAction", exitAction);
         
         // Add components
         centerPanel.add(createBSTButton1, b1);
