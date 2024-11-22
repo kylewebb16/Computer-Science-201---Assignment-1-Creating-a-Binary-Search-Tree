@@ -28,21 +28,20 @@ public class BST {
         this.insert(7);
     }
 
+    // Basic get methods for Main class
     public Node getRoot() {
         return root;
     }
-
     public int getNumOfNodes() {
         return numOfNodes;
     }
 
     
-// Methods that edit the tree
+// Methods that edit the tree 
 
     // 2nd assignment requirement
     // Accessible insert method to call private recursive method on root
     public void insert(int value) { root = rInsert(root, value); }
-
     private Node rInsert(Node currentNode, int value) {
         // Base case: if current Node is null, return new Node(value)
         if (currentNode == null) {
@@ -55,9 +54,11 @@ public class BST {
 
         return currentNode;
     }
+
     // 3rd assignment requirement 
     public void deleteNode(int value) { root = deleteNode(root, value); }
     private Node deleteNode(Node currentNode, int value) {
+        // Searches tree for given value, if value is found deletes the node
         if (currentNode == null) return null;
         // Traverse tree, search for value
         if (value < currentNode.value) currentNode.left = deleteNode(currentNode.left, value);
@@ -119,7 +120,7 @@ public class BST {
 
     // 5th assignment requirement
     public ArrayList<Integer> preOrderPrint() {
-        // Depth first search, visits current node before visiting children
+        // Depth first search, visits current node before visiting children, always goes left before right
         if (root == null) return null;
         ArrayList<Integer> results = new ArrayList<>(numOfNodes);
         // Create recursive traverse method
@@ -138,14 +139,13 @@ public class BST {
 
     // 6th assignment requirement
     public ArrayList<Integer> postOrderPrint() {
-        // Depth first search, visits nodes children first, then goes to parents
+        // Depth first search, visits left child nodes first, then right child node, then parent
         if (root == null) return null;
         ArrayList<Integer> results = new ArrayList<>(numOfNodes);
         // Create recursive traverse method
         class Traverse {
             public Traverse(Node currentNode) {
                 // Search left first, when no left nodes remain go right, when no child nodes write value to results
-
                 if (currentNode.left != null) new Traverse(currentNode.left);
                 if (currentNode.right != null) new Traverse(currentNode.right);
                 results.add(currentNode.value);
@@ -156,5 +156,5 @@ public class BST {
         return results;
     }
 
-    // 7th assignment requirement @src/Main.java 
+    // 7th assignment requirement @src/Main.java line 280
 }

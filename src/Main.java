@@ -14,13 +14,14 @@ public class Main {
     // Allows for GUI to create and access tree
     public static BST myBst;
     public static void main(String[] args) {
+        // Calls other methods to create GUI and allow user to interact with the tree.
         createGUI(); 
     }
 
 
     // Creates main JFrame and adds components from helper methods
     public static void createGUI() {
-        // General frame properties
+        // General frame properties, size, look and feel, icon image
         JFrame frame = new JFrame("Binary Search Tree");
         frame.setLayout(new BorderLayout()); 
         JFrame.setDefaultLookAndFeelDecorated(true);
@@ -41,13 +42,13 @@ public class Main {
     // Panel with directions for user
     public static void createInstructionsPanel(JFrame frame) {
         // Create top panel with instructions
+        // General properties
         JPanel instructionsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         instructionsPanel.setBorder(BorderFactory.createLineBorder(Color.black));
         JLabel directionsLabel = new JLabel("<html><center><h2>Use the buttons below, or specified keybindings<br>to create and access your binary search tree.</h2></html>");
-        // Font labelFont = new Font("Arial", Font.PLAIN, 20);
-        // directionsLabel.setFont(labelFont);
         directionsLabel.setHorizontalAlignment(JLabel.CENTER);
         instructionsPanel.add(directionsLabel);
+        // Add instruction panel to frame
         frame.getContentPane().add(instructionsPanel, BorderLayout.PAGE_START);
     }
 
@@ -58,6 +59,7 @@ public class Main {
         centerPanel.setBorder(BorderFactory.createLineBorder(Color.RED)); // Delete later
         boolean treeExists = false;
 
+        // Create buttons and specify general properties / layout
         // Button 1: Create a binary search tree
         JButton createBSTButton1 = new JButton("1. Create a new Binary Search Tree");
         createBSTButton1.setFont(buttonFont);
@@ -141,8 +143,9 @@ public class Main {
         b7.ipady = 20;
 
 
-        // Button actions
+        // Create actions activated by buttons, allows GUI access to BST
         Action createBSTAction = new AbstractAction("createTree") {
+            // Creates BST from GUI, enables other buttons once tree exists
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (myBst == null) {
@@ -153,20 +156,23 @@ public class Main {
                     preOrderButton5.setEnabled(true);
                     postOrderButton6.setEnabled(true);
                 } else {
-                        int choice = JOptionPane.showConfirmDialog(frame, "<html><center>Creating a new tree will <u>destroy the current tree</u><br>Do you want to continue?</html>");
-                        if (choice == JOptionPane.YES_OPTION) {
-                            myBst = new BST();
-                        } else {
-                            JOptionPane.showMessageDialog(frame, "Canceled create new search tree");
-                        }
+                    // Ensure user wants to delete current bst and create new one if already exists
+                    int choice = JOptionPane.showConfirmDialog(frame, "<html><center>Creating a new tree will <u>destroy the current tree</u><br>Do you want to continue?</html>");
+                    if (choice == JOptionPane.YES_OPTION) {
+                        myBst = new BST();
+                    } else {
+                        JOptionPane.showMessageDialog(frame, "Canceled create new search tree");
+                    }
                 }
             }
         };
+        // Map keybind & add to button
         createBSTButton1.addActionListener(createBSTAction);
         createBSTButton1.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("1"), "createTree");
         createBSTButton1.getActionMap().put("createTree", createBSTAction);
         
         Action addNodeAction = new AbstractAction("addNode") {
+            // Adds a new node to BST from GUI, only allows valid integer input, enables delete and print if first node
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -189,11 +195,13 @@ public class Main {
                 }
             }
         };
+        // Create keybind & add action to button
         nodeAddButton2.addActionListener(addNodeAction);
         nodeAddButton2.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("2"), "addNode");
         nodeAddButton2.getActionMap().put("addNode", addNodeAction);
         
         Action deleteNodeAction = new AbstractAction("deleteNode") {
+            // Use BST.deleteNode from GUI, checks for valid input, disables delete and print buttons if last node deleted
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -215,11 +223,13 @@ public class Main {
                 }
             }
         };
+        // Add keybind and add action to button
         deleteNodeButton3.addActionListener(deleteNodeAction);
         deleteNodeButton3.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("3"), "deleteNode");
         deleteNodeButton3.getActionMap().put("deleteNode", deleteNodeAction);        
 
         Action inOrderPrint = new AbstractAction("printInOrder") {
+            // Access BST.inOrderPrint from GUI, displays to user if the tree has nodes
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (myBst != null) {
@@ -235,22 +245,26 @@ public class Main {
             }
             
         };
+        // Add keybind and action to button
         inOrderButton4.addActionListener(inOrderPrint);
         inOrderButton4.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("4"), "printInOrder");
         inOrderButton4.getActionMap().put("printInOrder", inOrderPrint);
         
         Action preOrderAction = new AbstractAction("printPreOrder") {
+            // Access BST.preOrderPrint from GUI, display results to user
             @Override
             public void actionPerformed(ActionEvent e) {
                 ArrayList<Integer> results = myBst.preOrderPrint();
                 JOptionPane.showMessageDialog(frame, "Tree Pre Order:\n" + results, "Tree: Pre Order", JOptionPane.DEFAULT_OPTION);
             }
         };
+        // Add keybinding & add action to button
         preOrderButton5.addActionListener(preOrderAction);
         preOrderButton5.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("5"), "printPreOrder");
         preOrderButton5.getActionMap().put("printPreOrder", preOrderAction);
 
         Action postOrderPrintAction = new AbstractAction("printPostOrder") {
+            // Access BST.postOrderPrint from GUI, display result to user
             @Override
             public void actionPerformed(ActionEvent e) {
                 ArrayList<Integer> results = myBst.postOrderPrint();
@@ -258,11 +272,13 @@ public class Main {
     
             }
         };
+        // Add keybinding and add action to button
         postOrderButton6.addActionListener(postOrderPrintAction);
         postOrderButton6.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("6"), "printPostOrder");
         postOrderButton6.getActionMap().put("printPostOrder", postOrderPrintAction);
 
         Action exitAction = new AbstractAction("exitAction") {
+            // Allows user to exit the application using a button or keybinding
             @Override
             public void actionPerformed(ActionEvent e) {
                 int choice = JOptionPane.showConfirmDialog(frame, "Confirm: Do you want to exit the program?", "Exit Program", JOptionPane.YES_NO_CANCEL_OPTION);
@@ -274,6 +290,7 @@ public class Main {
                 }
             }
         };
+        // Add keybinding and add action to button
         exitProgramButton7.addActionListener(exitAction);
         exitProgramButton7.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("7"), "exitAction");
         exitProgramButton7.getActionMap().put("exitAction", exitAction);
@@ -288,5 +305,4 @@ public class Main {
         centerPanel.add(exitProgramButton7, b7);
         frame.getContentPane().add(centerPanel, BorderLayout.CENTER);
     }
-    
 }
